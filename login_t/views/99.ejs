@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html>
+    <head> 
+        
+        <meta lang="en" charset="utf-8">
+        <link rel="stylesheet" href="styles/99styles/body.css">
+        <link rel="stylesheet" href="styles/99styles/board.css">
+        <link rel="stylesheet" href="styles/99styles/audioPlayer.css">
+        
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="shortcut icon" href="99media/99.png">
+        <title>99 Puzzle</title>
+    </head>
+    <body>
+        <img id="kitten" src="99media/hane.png">
+        <!-- <div id="kitty"></div> -->
+        <div id="player">
+
+            <div class="details">
+                <div class="now-playing">Now Playing...</div>
+                <div class="track-art"></div>
+                <div class="track-name">shinsetsu (親切)</div>
+                <div class="track-artist">物語シリーズ</div>
+            </div>
+            
+            <div class="buttons">
+                <div class="prev-track" onclick="prevTrack()">
+                  <i class="fa fa-step-backward fa-2x"></i>
+                </div>
+                <div class="playpause-track" onclick="playpauseTrack()">
+                  <i class="fa fa-play-circle fa-5x"></i>
+                </div>
+                <div class="next-track" onclick="nextTrack()">
+                  <i class="fa fa-step-forward fa-2x"></i>
+                </div>
+            </div>
+           
+            <!-- seek slider-->
+            <div class="slider_container">
+                <div class="current-time">00:00</div>
+                <input type="range" min="1" max="100"
+                  value="0" class="seek_slider" onchange="seekTo()">
+                <div class="total-duration">00:00</div>
+            </div>
+           
+            <!-- volume slider-->
+            <div class="slider_container">
+                <i class="fa fa-volume-down"></i>
+                <input type="range" min="1" max="100"
+                  value="99" class="volume_slider" onchange="setVolume()">
+            </div>
+        
+        </div>
+
+        <!-- control buttons -->
+
+        <div id="navbar">
+            <div>
+                <span id="timer">00:00:000</span>
+                <button id="newGame" onclick="newGame()">new game</button>
+            </div>
+            <span id="moveCount">Moves: 0</span>
+
+            <select id="modeSelector" onchange="changeMode(this.value)">
+                <option value="4">4x4</option>
+                <option value="5">5x5</option>
+                <option value="10">10x10</option>
+            </select>  
+
+            <button id="pauseButton" onclick="pauseHandler()">pause</button>
+            <button id="hideGirls" onclick="hideGirls()">hide</button>
+        </div>
+
+        <div id="footbar">
+            <button id="muteSfx" onclick="muteSfx()">mute sfx</button>
+            <select id="sfxSelector" onchange="sfxSelect(this.value)">
+                <option value="media/s1.mp3">wood</option>
+                <option value="media/s2.mp3">marble</option>
+                <option value="media/s3.mp3">bubble</option>
+            </select> 
+            <button id="bg-color-toggle" onclick="showColorer()">bg color</button>
+            <a class ="social" href="https://github.com/bmai1/99-puzzle" target="_blank">
+                <i id="ghub" class="fa fa-github"></i>
+            </a>
+            <a class ="social" href="https://www.reddit.com/user/proxarius1" target="_blank">
+                <i id="reddit" class="fa fa-reddit"></i>
+            </a>
+            <a class ="social" href="https://open.spotify.com/user/c0h7imq640xqinp2w55r08xhc" target="_blank">
+                <i id="spotify" class="fa fa-spotify"></i>
+            </a>
+        </div>
+        <div style="display: none" id="bg-colorer">
+            <div id="color-indicator"></div>
+            <div id="color-picker"></div>
+        </div>
+        <!-- endof controls -->
+
+        <table id="board16">
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>4</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>6</td>
+                    <td>7</td>
+                    <td>8</td>
+                </tr>
+                <tr>
+                    <td>9</td>
+                    <td>10</td>
+                    <td>11</td>
+                    <td>12</td>
+                </tr>
+                <tr>
+                    <td>13</td>
+                    <td>14</td>
+                    <td>15</td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table id="board25">
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>4</td>
+                    <td>5</td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>7</td>
+                    <td>8</td>
+                    <td>9</td>
+                    <td>10</td>
+                </tr>
+                <tr>
+                    <td>11</td>
+                    <td>12</td>
+                    <td>13</td>
+                    <td>14</td>
+                    <td>15</td>
+
+                </tr>
+                <tr>
+                    <td>16</td>
+                    <td>17</td>
+                    <td>18</td>
+                    <td>19</td>
+                    <td>20</td>
+                </tr>
+                <tr>
+                    <td>21</td>
+                    <td>22</td>
+                    <td>23</td>
+                    <td>24</td>
+                    <td>0</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table id="board100">
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>4</td>
+                    <td>5</td>
+                    <td>6</td>
+                    <td>7</td>
+                    <td>8</td>
+                    <td>9</td>
+                    <td>10</td>
+                </tr>
+                <tr>
+                    <td>11</td>
+                    <td>12</td>
+                    <td>13</td>
+                    <td>14</td>
+                    <td>15</td>
+                    <td>16</td>
+                    <td>17</td>
+                    <td>18</td>
+                    <td>19</td>
+                    <td>20</td>
+                </tr>
+                <tr>
+                    <td>21</td>
+                    <td>22</td>
+                    <td>23</td>
+                    <td>24</td>
+                    <td>25</td>
+                    <td>26</td>
+                    <td>27</td>
+                    <td>28</td>
+                    <td>29</td>
+                    <td>30</td>
+                </tr>
+                <tr>
+                    <td>31</td>
+                    <td>32</td>
+                    <td>33</td>
+                    <td>34</td>
+                    <td>35</td>
+                    <td>36</td>
+                    <td>37</td>
+                    <td>38</td>
+                    <td>39</td>
+                    <td>40</td>
+                </tr>
+                <tr>
+                    <td>41</td>
+                    <td>42</td>
+                    <td>43</td>
+                    <td>44</td>
+                    <td>45</td>
+                    <td>46</td>
+                    <td>47</td>
+                    <td>48</td>
+                    <td>49</td>
+                    <td>50</td>
+                </tr>
+                <tr>
+                    <td>51</td>
+                    <td>52</td>
+                    <td>53</td>
+                    <td>54</td>
+                    <td>55</td>
+                    <td>56</td>
+                    <td>57</td>
+                    <td>58</td>
+                    <td>59</td>
+                    <td>60</td>
+                </tr>
+                <tr>
+                    <td>61</td>
+                    <td>62</td>
+                    <td>63</td>
+                    <td>64</td>
+                    <td>65</td>
+                    <td>64</td>
+                    <td>67</td>
+                    <td>68</td>
+                    <td>69</td>
+                    <td>70</td>
+                </tr>
+                <tr>
+                    <td>71</td>
+                    <td>72</td>
+                    <td>73</td>
+                    <td>74</td>
+                    <td>75</td>
+                    <td>76</td>
+                    <td>77</td>
+                    <td>78</td>
+                    <td>79</td>
+                    <td>80</td>
+                </tr>
+                <tr>
+                    <td>81</td>
+                    <td>82</td>
+                    <td>83</td>
+                    <td>84</td>
+                    <td>85</td>
+                    <td>86</td>
+                    <td>87</td>
+                    <td>88</td>
+                    <td>89</td>
+                    <td>90</td>
+                </tr>
+                <tr>
+                    <td>91</td>
+                    <td>92</td>
+                    <td>93</td>
+                    <td>94</td>
+                    <td>95</td>
+                    <td>96</td>
+                    <td>97</td>
+                    <td>98</td>
+                    <td>99</td>
+                    <td></td>
+                </tr> 
+            </tbody>
+        </table>
+
+        <div id="playAgain" onclick="hideAgain()">
+            <h1 id="winMessage">you win. hooray.</h1>
+            <div id="record">best time: 0ms</div>
+            <div id="apm-counter">apm: 0</div>
+            <button id="playAgainButton" onclick="newGame()">play again</button>
+            <!-- async function to load scores from database -->
+            <button id="lbRedirect" onclick="getScores()">leaderboard</button>
+            <!-- <button id="lbRedirect" onclick='window.location.href = "/leaderboard";'>leaderboard</button> -->
+        </div>
+
+        <div id="mobile-controls">
+            <div id="keytip1">
+                <i class="fa fa-arrow-down arrow"></i>
+            </div>
+            <div id="keytip2">
+                <i class="fa fa-arrow-right arrow"></i>
+            </div>
+            <div id="keytip3">
+                <i class="fa fa-arrow-left arrow"></i>
+            </div>
+            <div id="keytip4">
+                <i class="fa fa-arrow-up arrow"></i>
+            </div>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script>
+        <script src="scripts/99scripts/timer.js"></script>
+        <script src="scripts/99scripts/audio.js"></script>
+        <script src="scripts/99scripts/board.js"></script>
+        <script src="scripts/99scripts/color.js"></script>
+        <script>
+            let userData = {
+                username: '<%= user.username %>', 
+            };
+        </script>
+        <script src="scripts/99scripts/leaderboard.js"></script>
+	</body>
+</html>

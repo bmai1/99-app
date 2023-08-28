@@ -1,0 +1,360 @@
+body {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background-color: pink;
+    font-family: Gill Sans;
+    transition: background-color 0.3s ease;
+}
+
+button { font-family: Gill Sans; }
+select { font-family: Gill Sans; }
+
+#navbar {
+    background-color: rgba(255, 255, 255, 0.815);
+    opacity: 0.9;
+    border-radius: 10px;
+    height: 50px;
+    width: 30vw;
+    padding: 10px;
+    position: relative;
+    top: 75px;
+    left: 49.4%;
+    transform: translate(-50%, -50%);
+    transition: opacity 0.5s ease;
+}
+
+#timer {
+    position: absolute;
+    left: 25px;
+    font-size: 24px;
+}
+
+#moveCount {
+    position: absolute;
+    top: 42px;
+    left: 35px;
+}
+
+#newGame {
+    position: absolute;
+    right: 40px;
+    top: 15px;
+    font-size: 16px;
+
+    color: crimson;
+    background-color: pink;
+    
+    border: none;
+    border-radius: 10px;
+    outline: none;
+    box-shadow: none;
+    user-select: none;
+}
+
+#pauseButton {
+    position: absolute;
+    right: 120px;
+    top: 15px;
+    font-size: 16px;
+
+    color: rgb(83, 20, 220);
+    background-color: rgb(192, 220, 255);
+    
+    border: none;
+    border-radius: 10px;
+    outline: none;
+    box-shadow: none;
+    user-select: none;
+}
+
+#modeSelector {
+    position: absolute;
+    right: 40px;
+    top: 43px;
+
+    outline: none;
+    box-shadow: none;
+    user-select: none;
+}
+
+#hideGirls {
+    position: absolute;
+    right: 105px;
+    top: 43px;
+
+    height: 20px;
+    /* border: none; */
+    border-radius: 5px;
+    outline: none;
+    box-shadow: none;
+    user-select: none;
+}
+
+#kitten {
+    opacity: 1;
+    transform: rotate(12deg);
+    position: absolute;
+    bottom: -100px;
+    height: 850px;
+    left: -60px;
+}
+
+#kitty {
+    opacity: 0.9;
+    position: absolute;
+    bottom: 0px;
+    height: 700px;
+    width: 600px;
+    transform: rotate(12deg);
+    /* background-image: linear-gradient(to top, rgba(255, 192, 203, 0.45), transparent), url("media/hane.png"); */
+    background-image: url("media/hane.png");
+    background-size: 200%;
+    background-repeat: no-repeat;
+}
+
+#playAgain {
+    /* display: none;  */
+    position: absolute;
+    top: 50.1%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 33vw;
+    height: 62vh;
+    
+    border-radius: 15px;
+    background-color: rgba(255, 255, 255, 0.591);
+    text-align: center;
+}
+
+#playAgainButton {
+    width: 200px;
+    height: 50px;
+
+    color: white;
+    background-color: rgb(240, 98, 121);
+    font-size: 24px;
+    font-family: 'Trebuchet MS';
+
+    border: none;
+    border-radius: 10px;
+    outline: none;
+    box-shadow: none;
+    user-select: none;
+}
+
+#lbRedirect {
+    width: 200px;
+    height: 50px;
+
+    color: white;
+    background-color: rgb(143, 151, 255);
+    font-size: 24px;
+    font-family: 'Trebuchet MS';
+
+    border: none;
+    border-radius: 10px;
+    outline: none;
+    box-shadow: none;
+    user-select: none;
+}
+
+
+#record {
+    margin-bottom: 5px; 
+    color: crimson;
+}
+
+#apm-counter {
+    margin-bottom: 10px;
+    color: crimson;
+}
+
+#winMessage {
+    margin-top: 150px;
+    font-size: 50px;
+    color: crimson;
+}
+
+button:hover {
+    filter: brightness(95%);
+}
+
+#footbar {
+    background-color: rgba(80, 70, 183, 0.5);
+    opacity: 0.9;
+    border-radius: 20px;
+    height: 40px;
+    width: 30vw;
+    padding: 10px;
+    position: relative;
+    top: 550px;
+    left: 49.4%;
+    transform: translate(-50%, -50%);
+    transition: opacity 0.5s ease;
+}
+#ghub {
+    color: black;
+    opacity: 0.7;
+    position: absolute;
+    right: 190px;
+    top: 15px;
+    font-size: 30px;
+    transition: color 0.3s ease;
+}
+#spotify {
+    color: black;
+    opacity: 0.7;
+    position: absolute;
+    right: 231px;
+    top: 15px;
+    font-size: 29px;
+    transition: color 0.3s ease;
+}
+#reddit {
+    color: black;
+    opacity: 0.7;
+    position: absolute;
+    left: 155px;
+    top: 17px;
+    font-size: 25px;
+    transition: color 0.3s ease;
+}
+
+#bg-colorer {
+    position: absolute;
+    left: 300px;
+    bottom: 10px;
+}
+
+
+#reddit:hover, #spotify:hover, #ghub:hover {
+    color: rgb(99, 0, 79);
+}
+
+
+#bg-color-toggle {
+    position: relative;
+    font-size: 15px;
+    top: 8px;
+    left: -50px;
+
+    color: rgb(62, 29, 140);
+    background-color: rgb(179, 238, 249);
+    
+    border: none;
+    border-radius: 10px;
+    outline: none;
+    box-shadow: none;
+    user-select: none;
+    
+}
+#muteSfx{
+    position: absolute;
+    font-size: 15px;
+    top: 18.5px;
+    right: 90px;
+    
+
+    color: rgb(16, 48, 26);
+    background-color: rgb(176, 255, 188, 0.9);
+    
+    border: none;
+    border-radius: 10px;
+    outline: none;
+    box-shadow: none;
+    user-select: none;
+}
+
+#sfxSelector {
+    position: relative;
+    top: 8px;
+    left: 360px;
+
+
+    outline: none;
+    box-shadow: none;
+    user-select: none;
+}
+
+@media only screen and (max-width: 1000px) {
+    #player, #kitten, #hideGirls, #footbar, #modeSelector {
+      display: none !important;
+    }
+    #newGame {
+        padding: 10px;
+        font-size: 50px;
+        right: 15px;
+    }
+    #pauseButton {
+        padding: 10px;
+        font-size: 50px;
+        right: 250px;
+    }
+    #timer {
+        top: 17px;
+        font-size: 50px;
+    }
+    #moveCount {
+        left: 25px;
+        top: 100px;
+        font-size: 35px;
+    }
+    #navbar {
+        border: 2px solid rgb(121, 8, 106);
+        width: 80vw !important;
+        height: 10vh !important;
+        top: 200px;
+        font-size: 50px !important;
+    }
+    
+
+    #keys, #mobile-controls, #keytip  {
+        display: block !important; 
+    }
+    
+    #mobile-controls {
+        position: absolute;
+        bottom: 0px;
+        left: 50%;
+        transform: translate(-50%);
+    }
+    #keytip1, #keytip2, #keytip3, #keytip4 {
+        border: 2px solid rgb(121, 8, 106);
+        position: absolute;
+        display: flex !important;
+        justify-content: center;
+        align-items: center;
+        background-color: rgb(254, 130, 167);
+        width: 150px;
+        height: 150px;
+        border-radius: 10px;
+        color: rgb(116, 7, 89);
+    }
+    #keytip1 {
+        bottom: 20px;
+        left: -50px;
+    }
+    #keytip2 {
+        bottom: 20px;
+        left: 120px;
+    }
+    #keytip3 {
+        bottom: 20px;
+        left: -220px;
+
+    }
+    #keytip4 {
+        bottom: 190px;
+        left: -50px;
+    }
+    .arrow {
+        font-size: 50px !important;
+        right: 50px;
+    }
+}
+
+#keys, #mobile-controls, #keytip {
+    display: none;
+}
+

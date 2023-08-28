@@ -3,6 +3,7 @@ require('dotenv').config();
 // const { MongoClient, ServerApiVersion } = require('mongodb');
 const mongoose = require('mongoose');
 const User = require('./models/accounts');
+const Leaderboard = require('./models/leaderboard');
 
 // login session w/ cookies
 const jwt = require('jsonwebtoken');
@@ -20,6 +21,8 @@ const app = express();
 app.use(express.static(path.join(__dirname, 'public')));
 // body parser middleware
 app.use(bodyParser.urlencoded({ extended: true })); 
+app.use(bodyParser.json());
+
 // cookie handler middleware
 app.use(cookieParser());
 
@@ -48,6 +51,23 @@ app.get('/profile', (req, res) => {
   }
 });
 
+app.get('/99', (req, res) => {
+  if (req.user) {
+    // The user is authenticated, so you can access req.user to get their data
+    res.render('99', { user: req.user });
+  } else {
+    res.redirect('/login'); // Redirect to the login page if not authenticated
+  }
+});
+
+app.get('/leaderboard', (req, res) => {
+  if (req.user) {
+    res.render('leaderboard', { user: req.user });
+  } else {
+    res.redirect('/login'); 
+  }
+});
+
 
 // Set up view engine and views directory
 app.set('view engine', 'ejs');
@@ -65,10 +85,10 @@ mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true } )
 // Serve the HTML views
 app.get('/', (req, res) => {
   if (req.cookies.jwtToken) {
-    res.redirect('/profile');
+    res.redirect('/99');
   }
   else {
-  res.render('login', { message: '' });
+    res.render('login', { message: '' });
   }
 });
 
@@ -77,8 +97,7 @@ app.get('/login', (req, res) => {
   if (token) {
     try {
       const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
-      // Redirect to the profile page if the token is valid
-      res.redirect('/profile');
+      res.redirect('/99');
       return; // Exit the function after redirection
     } catch (error) {
       console.log('Invalid token:', error.message);
@@ -118,13 +137,43 @@ app.post('/login', async (req, res) => {
 
   try {
       await loginUser(username, password, res);
-      res.redirect('/profile');
+      res.redirect('/99');
       // res.render('homepage');
   } catch (error) {
       res.render('login', { message: 'Username or password is incorrect.' });
   }
 });
 
+// handle leaderboard
+app.post('/save-score', async (req, res) => {
+  try {
+      console.log('Received data:', req.body);
+      const { username, elapsedTime } = req.body;
+
+      // Find the existing user in the leaderboard
+      const existingUser = await Leaderboard.findOne({ username });
+
+      if (!existingUser || elapsedTime < existingUser.bestTime16) {
+          if (existingUser) {
+              // Update the score if it's better
+              existingUser.bestTime16 = elapsedTime;
+              await existingUser.save();
+          } else {
+              // Create a new user entry if not found
+              await Leaderboard.create({
+                  username: username,
+                  bestTime16: elapsedTime,
+              });
+          }
+          res.status(200).json({ message: 'Score saved successfully' });
+      } else {
+          res.status(200).json({ message: 'Score not updated' });
+      }
+  } catch (error) {
+      console.error('Error:', error);
+      res.status(500).json({ error: 'An error occurred' });
+  }
+});
 
 // Start the Express.js server
 const PORT = 3000;

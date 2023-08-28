@@ -51,6 +51,7 @@ table {
     border-radius: 5px;
 }
 
+
 #currCell {
     transition: transform 0.2s ease-in-out;
 }

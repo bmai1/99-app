@@ -1,1 +1,9 @@
-<p>HELLO WORLD</p>
+<h2>Leaderboard</h2>
+<ul>
+    <% leaderboard.forEach((entry, index) => { %>
+        <li>
+            <span><%= index + 1 %>.</span>
+            <%= entry.username %>: <%= entry.bestTime16 %> milliseconds
+        </li>
+    <% }); %>
+</ul>

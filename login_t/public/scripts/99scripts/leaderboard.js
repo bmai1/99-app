@@ -27,9 +27,28 @@ async function saveScore() {
 const navbar = document.getElementById("navbar");
 const footbar = document.getElementById("footbar");
 
+const lbContainer = document.getElementById("lbContainer");
 async function getScores() {
     board.style.opacity = 0;
     navbar.style.opacity = 0;
     footbar.style.opacity = 0;
+    playAgain.style.opacity = 0;
+    lbContainer.style.display = "block";
+
+    try {
+        const response = await fetch("/leaderboard");
+        const templateHTML = await response.text();
+        lbContainer.innerHTML = templateHTML;
+    } catch (error) {
+        console.error("Error:", error);
+    }
+}
+
+function hideScores() {
+    board.style.opacity = 1;
+    navbar.style = "";
+    footbar.style = "";
+    playAgain.style = "";
+    lbContainer.style.display = "none";
 }
 

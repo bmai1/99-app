@@ -60,12 +60,21 @@ app.get('/99', (req, res) => {
   }
 });
 
-app.get('/leaderboard', (req, res) => {
+app.get('/leaderboard', async (req, res) => {
   if (req.user) {
-    res.render('leaderboard', { user: req.user });
-  } else {
-    res.redirect('/login'); 
-  }
+    try {
+      const leaderboard = await Leaderboard.find()
+        .sort({ bestTime16: 1 }) // Sort in ascending order
+        .limit(15); // Limit the results to the lowest 15
+        res.render('leaderboard', { user: req.user, leaderboard: leaderboard });
+    } catch (error) {
+      console.error("Error:", error);
+      res.status(500).json({ error: "An error occurred" });
+    }
+    } 
+    else {
+      res.redirect('/login'); 
+    }
 });
 
 

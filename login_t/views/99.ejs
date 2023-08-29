@@ -289,8 +289,8 @@
                 </tr> 
             </tbody>
         </table>
-
-        <div id="playAgain" onclick="hideAgain()">
+        <!-- onclick="hideAgain() -->
+        <div id="playAgain">
             <h1 id="winMessage">you win. hooray.</h1>
             <div id="record">best time: 0ms</div>
             <div id="apm-counter">apm: 0</div>
@@ -299,6 +299,9 @@
             <button id="lbRedirect" onclick="getScores()">leaderboard</button>
             <!-- <button id="lbRedirect" onclick='window.location.href = "/leaderboard";'>leaderboard</button> -->
         </div>
+
+        <div id="lbContainer" onclick="hideScores()"></div>
+
 
         <div id="mobile-controls">
             <div id="keytip1">
@@ -314,6 +317,7 @@
                 <i class="fa fa-arrow-up arrow"></i>
             </div>
         </div>
+
 
         <script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script>
         <script src="scripts/99scripts/timer.js"></script>

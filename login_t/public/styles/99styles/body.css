@@ -125,6 +125,7 @@ select { font-family: Gill Sans; }
     border-radius: 15px;
     background-color: rgba(255, 255, 255, 0.591);
     text-align: center;
+    transition: opacity 0.5s ease;
 }
 
 #playAgainButton {
@@ -159,6 +160,24 @@ select { font-family: Gill Sans; }
     user-select: none;
 }
 
+#lbContainer {
+    color: white;
+    display: none;
+    position: absolute;
+    top: 50.1%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 33vw;
+    height: 90vh;
+    
+    border-radius: 15px;
+    background-color: rgba(27, 27, 27, 0.591);
+    text-align: center;
+}
+
+li {
+    list-style-type: none;
+}
 
 #record {
     margin-bottom: 5px; 
